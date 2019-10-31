@@ -15,6 +15,10 @@ workflows:
           requires:
             - orb-tools/lint
 
+      - orb-tools/validate:
+          requires:
+            - orb-tools/pack
+
       # release dev version of orb, for testing & possible publishing
       # requires a CircleCI API token to be stored as CIRCLE_TOKEN (default)
       # https://circleci.com/docs/2.0/managing-api-tokens
