@@ -16,4 +16,6 @@
 
 [![CircleCI](https://circleci.com/gh/sonatype-nexus-community/circleci-maven-release-orb.svg?style=svg)](https://circleci.com/gh/sonatype-nexus-community/circleci-maven-release-orb)
 
-A CircleCI [Orb](https://circleci.com/docs/2.0/orb-intro/) than can be used to deploy maven projects using the [maven-release-plugin](https://maven.apache.org/maven-release/maven-release-plugin/)
+A CircleCI [Orb](https://circleci.com/docs/2.0/orb-intro/) than can be used to deploy maven projects using the [maven-release-plugin](https://maven.apache.org/maven-release/maven-release-plugin/).
+
+Status: Waaaay Alpha!
