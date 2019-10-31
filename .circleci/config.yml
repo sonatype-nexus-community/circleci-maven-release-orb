@@ -4,7 +4,7 @@ orbs:
 #  circleci-maven-release-orb: sonatype-community/circleci-maven-release-orb@dev:alpha
 
 workflows:
-  lint_pack-validate:
+  lint_pack-validate_publish-dev:
     jobs:
       # this `lint-pack_validate_publish-dev` workflow will run on any commit
       - orb-tools/lint
