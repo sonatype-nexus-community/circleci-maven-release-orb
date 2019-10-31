@@ -1,0 +1,22 @@
+version: 2.1
+orbs:
+  orb-tools: circleci/orb-tools@8.27.4
+  circleci-maven-release-orb: sonatype-community/circleci-maven-release-orb@dev:alpha
+
+workflows:
+  lint_pack-validate:
+    jobs:
+      # this `lint-pack_validate_publish-dev` workflow will run on any commit
+      - orb-tools/lint
+
+      # pack your orb YAML files to a single orb.yml
+      # validate the orb.yml file to ensure it is well-formed
+      - orb-tools/pack:
+          requires:
+            - orb-tools/lint
+
+#      - orb-tools/publish:
+#          orb-path: src/orb.yml
+#          orb-ref: sonatype-nexus-community/circleci-maven-release-orb@dev:${CIRCLE_BRANCH}
+#          publish-token-variable: "$CIRCLECI_DEV_API_TOKEN"
+#          validate: true
