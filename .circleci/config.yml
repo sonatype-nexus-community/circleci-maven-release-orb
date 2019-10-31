@@ -27,7 +27,7 @@ workflows:
       - orb-tools/publish-dev:
           orb-name: sonatype-nexus-community/circleci-maven-release-orb
           requires:
-            - orb-tools/pack
+            - orb-tools/validate
 
 #      - orb-tools/publish:
 #          orb-path: src/orb.yml
