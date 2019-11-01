@@ -24,7 +24,7 @@ jobs:
             ls -alh /home/circleci/
             FAILED_CHECK=false
             echo "Checking gpg setup..."
-            gpgDir=/home/circleci/.gnupg/
+            gpgDir=/home/circleci/.gnupg
             if [ ! -f "$gpgDir" ]; then
               echo "Missing gpg dir: $gpgDir"
               FAILED_CHECK=true
