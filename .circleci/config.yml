@@ -7,8 +7,6 @@ jobs:
   check-results-job:
     docker:
       - image: circleci/openjdk:8-jdk
-    environment:
-      dryRun: true
     steps:
       - checkout
       - attach_workspace:
