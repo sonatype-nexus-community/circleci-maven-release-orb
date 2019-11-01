@@ -19,3 +19,27 @@
 A CircleCI [Orb](https://circleci.com/docs/2.0/orb-intro/) than can be used to deploy maven projects using the [maven-release-plugin](https://maven.apache.org/maven-release/maven-release-plugin/).
 
 Status: Waaaay Alpha!
+
+## The Fine Print
+
+It is worth noting that this is **NOT SUPPORTED** by Sonatype, and is a contribution of ours
+to the open source community (read: you!)
+
+Don't worry, using this community item does not "void your warranty". In a worst case scenario, you may be asked 
+by the Sonatype Support team to remove the community item in order to determine the root cause of any issues.
+
+Remember:
+
+* Use this contribution at the risk tolerance that you have
+* Do NOT file Sonatype support tickets related to Foo support in regard to this plugin
+* DO file issues here on GitHub, so that the community can pitch in
+
+Phew, that was easier than I thought. Last but not least of all:
+
+Have fun creating and using this plugin and the Nexus platform, we are glad to have you here!
+
+## Getting help
+
+Looking to contribute to our code but need some help? There's a few ways to get information:
+
+* Chat with us on [Gitter](https://gitter.im/sonatype/nexus-developers)
