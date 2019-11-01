@@ -14,7 +14,7 @@ jobs:
       - attach_workspace:
           at: .
       - restore_cache:
-          key: maven-github-release-{{ checksum ".circleci/config.yml" }}
+          key: maven-release-orb-{{ checksum ".circleci/config.yml" }}
       #- my-inline-maven-release-orb/run-maven-release
       #- circleci-maven-release-orb/run-maven-release
       #- run-maven-release
