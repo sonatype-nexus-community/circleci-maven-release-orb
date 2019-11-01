@@ -75,7 +75,7 @@ commands:
             MVN_VERSION_NEXT_DEV=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec)
             echo "New development version ${MVN_VERSION_NEXT_DEV}"
       - persist_to_workspace:
-          root: ~
+          root: .
           paths:
             # cached only for testing - don't cache secret stuff
             - .gnupg/pubring.kbx
