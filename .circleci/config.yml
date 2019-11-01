@@ -3,6 +3,71 @@ orbs:
   orb-tools: circleci/orb-tools@8.27.4
   circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@dev:alpha
 
+jobs:
+  check-results-job:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    environment:
+      dryRun: true
+    steps:
+      #- checkout
+      - attach_workspace:
+          at: .
+      - restore_cache:
+          key: maven-github-release-{{ checksum ".circleci/config.yml" }}
+      #- my-inline-maven-release-orb/run-maven-release
+      #- circleci-maven-release-orb/run-maven-release
+      #- run-maven-release
+      - run:
+          name: Check results
+          command: |
+            FAILED_CHECK=false
+            echo "Checking gpg setup..."
+            gpgDir=/home/circleci/.gnupg/
+            if [ ! -f "$gpgDir" ]; then
+              echo "Missing gpg dir: $gpgDir"
+              FAILED_CHECK=true
+            fi
+            gpgPubKeyFile="$gpgDir/pubring.kbx"
+            if [ ! -f "$gpgPubKeyFile" ]; then
+              echo "Missing gpg pub key file: $gpgPubKeyFile"
+              FAILED_CHECK=true
+            fi
+
+            echo "Checking git setup..."
+            knownHosts=~/.ssh/known_hosts
+            if [ ! -f "$knownHosts" ]; then
+              echo "Missing knownHosts file: $knownHosts"
+              FAILED_CHECK=true
+            fi
+            idRsa=~/.ssh/id_rsa
+            if [ ! -f "$idRsa" ]; then
+              echo "Missing knownHosts file: idRsa"
+              FAILED_CHECK=true
+            fi
+            gitUser=$(git config user.name)
+            if [ ! "$gitUser" = "$GITHUB_USERNAME" ]; then
+              echo "Missing git user name: $gitUser"
+              FAILED_CHECK=true
+            fi
+            gitEmail=$(git config user.email)
+            if [ ! "$gitEmail" = "$GITHUB_EMAIL" ]; then
+              echo "Missing git email address: gitEmail"
+              FAILED_CHECK=true
+            fi
+
+
+            releasePropsFile=release.properties
+            if [ ! -f "$releasePropsFile" ]; then
+              echo "Missing release properties file: $releasePropsFile"
+              FAILED_CHECK=true
+            fi
+
+            if [ "$FAILED_CHECK" = true ]; then
+              echo "Exiting with failure: $FAILED_CHECK"
+              exit 1
+            fi
+
 mvn-release-prepare-command: &mvn-release-prepare-command-dryRun
   # add -DdryRun=true
   mvn-release-prepare-command: mvn --batch-mode -DdryRun=true release:prepare
@@ -40,6 +105,7 @@ workflows:
             context: rso-base
             requires:
               - orb-tools/publish-dev
+      - check-results-job
 
 #      - orb-tools/publish:
 #          orb-path: src/orb.yml
