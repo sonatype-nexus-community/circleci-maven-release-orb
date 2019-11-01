@@ -5,11 +5,11 @@ orbs:
 
 mvn-release-prepare-command: &mvn-release-prepare-command-dryRun
   # add -DdryRun=true
-  mvn-release-prepare-command: mvn --batch-mode -DdryRun=true release:prepare -f test/test-pom.xml
+  mvn-release-prepare-command: mvn --batch-mode -DdryRun=true release:prepare
 
 mvn-release-perform-command: &mvn-release-perform-command-dryRun
   # add -DdryRun=true
-  mvn-release-perform-command: mvn --batch-mode -DdryRun=true release:perform -s test/.maven.xml -f test/test-pom.xml
+  mvn-release-perform-command: mvn --batch-mode -DdryRun=true release:perform -s test/.maven.xml
 
 workflows:
   lint_pack-validate_publish-dev:
