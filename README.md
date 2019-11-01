@@ -36,7 +36,7 @@ Remember:
 
 Phew, that was easier than I thought. Last but not least of all:
 
-Have fun creating and using this plugin and the Nexus platform, we are glad to have you here!
+Have fun creating and using this Orb, we are glad to have you here!
 
 ## Getting help
 
