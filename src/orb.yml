@@ -44,8 +44,8 @@ commands:
             echo "Setting private SSH key for pushing new version to repo..."
             echo $GITHUB_COMMIT_KEY | base64 --decode >> ~/.ssh/id_rsa
             chmod 400 ~/.ssh/id_rsa # prevents "UNPROTECTED PRIVATE KEY FILE" error
-            git config user.name "$EMAIL_NAME"
-            git config user.email "$EMAIL_ADDRESS"
+            git config user.name "$GITHUB_USERNAME"
+            git config user.email "$GITHUB_EMAIL"
 
   maven-release:
     parameters:
