@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   orb-tools: circleci/orb-tools@8.27.4
-  circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@dev:alpha
+  #circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@dev:alpha
 
 jobs:
   check-results-job:
@@ -102,15 +102,15 @@ workflows:
             - orb-tools/pack
 
       # integration tests
-      - circleci-maven-release-orb/run-maven-release:
-            <<: *mvn-release-prepare-command-dryRun
-            <<: *mvn-release-perform-command-dryRun
-            context: rso-base
-            requires:
-              - orb-tools/publish-dev
-      - check-results-job:
-            requires:
-              - circleci-maven-release-orb/run-maven-release
+#      - circleci-maven-release-orb/run-maven-release:
+#            <<: *mvn-release-prepare-command-dryRun
+#            <<: *mvn-release-perform-command-dryRun
+#            context: rso-base
+#            requires:
+#              - orb-tools/publish-dev
+#      - check-results-job:
+#            requires:
+#              - circleci-maven-release-orb/run-maven-release
 
 #      - orb-tools/publish:
 #          orb-path: src/orb.yml
