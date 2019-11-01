@@ -31,7 +31,7 @@ by the Sonatype Support team to remove the community item in order to determine 
 Remember:
 
 * Use this contribution at the risk tolerance that you have
-* Do NOT file Sonatype support tickets related to Foo support in regard to this plugin
+* Do NOT file Sonatype support tickets related to Orb support
 * DO file issues here on GitHub, so that the community can pitch in
 
 Phew, that was easier than I thought. Last but not least of all:
