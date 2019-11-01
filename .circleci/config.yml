@@ -3,6 +3,14 @@ orbs:
   orb-tools: circleci/orb-tools@8.27.4
   circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@dev:alpha
 
+mvn-release-prepare-command: &mvn-release-prepare-command-dryRun
+  # add -DdryRun=true
+  mvn-release-prepare-command: mvn --batch-mode -DdryRun=true release:prepare
+
+mvn-release-perform-command: &mvn-release-perform-command-dryRun
+  # add -DdryRun=true
+  mvn-release-perform-command: mvn --batch-mode -DdryRun=true release:perform -s .circleci/.maven.xml
+
 workflows:
   lint_pack-validate_publish-dev:
     jobs:
@@ -24,6 +32,11 @@ workflows:
           orb-name: sonatype-nexus-community/circleci-maven-release-orb
           requires:
             - orb-tools/pack
+
+      # integration tests
+      - circleci-maven-release-orb/run-maven-release:
+            <<: *mvn-release-prepare-command-dryRun
+            <<: *mvn-release-perform-command-dryRun
 
 #      - orb-tools/publish:
 #          orb-path: src/orb.yml
