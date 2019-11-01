@@ -79,7 +79,7 @@ commands:
           paths:
             - .
             # cached only for testing - don't cache secret stuff
-            - /home/circleci/.gnupg/pubring.kbx
+            - ../../home/circleci/.gnupg/pubring.kbx
       - save_cache:
           paths:
             - ~/.m2

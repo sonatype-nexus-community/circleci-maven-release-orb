@@ -21,6 +21,7 @@ jobs:
       - run:
           name: Check results
           command: |
+            ls -alh
             FAILED_CHECK=false
             echo "Checking gpg setup..."
             gpgDir=/home/circleci/.gnupg/
