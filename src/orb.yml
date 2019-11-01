@@ -77,8 +77,7 @@ commands:
       - persist_to_workspace:
           root: .
           paths:
-            # cached only for testing - don't cache secret stuff
-            - .gnupg/pubring.kbx
+            - .
       - save_cache:
           paths:
             - ~/.m2
