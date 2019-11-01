@@ -67,8 +67,8 @@ commands:
             echo "Starting new release..."
             MVN_VERSION=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec)
             echo "Preparing release from version ${MVN_VERSION}..."
-            #echo '<< parameters.mvn-release-prepare-command >>'
-            #exit 1
+            echo '<< parameters.mvn-release-prepare-command >>'
+            exit 1
             << parameters.mvn-release-prepare-command >>
             echo "Generated release.properties: ..."
             cat release.properties
