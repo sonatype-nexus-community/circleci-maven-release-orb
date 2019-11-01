@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~
+          at: .
       - restore_cache:
           key: maven-release-orb-{{ checksum ".circleci/config.yml" }}
       #- my-inline-maven-release-orb/run-maven-release
