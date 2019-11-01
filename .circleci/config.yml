@@ -9,7 +9,7 @@ mvn-release-prepare-command: &mvn-release-prepare-command-dryRun
 
 mvn-release-perform-command: &mvn-release-perform-command-dryRun
   # add -DdryRun=true
-  mvn-release-perform-command: mvn --batch-mode -DdryRun=true release:perform -s test/.maven.xml
+  mvn-release-perform-command: mvn --batch-mode -DdryRun=true release:perform
 
 workflows:
   lint_pack-validate_publish-dev:
