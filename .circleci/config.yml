@@ -102,12 +102,12 @@ workflows:
             - orb-tools/pack
 
       # integration tests
-#      - circleci-maven-release-orb/run-maven-release:
-#            <<: *mvn-release-prepare-command-dryRun
-#            <<: *mvn-release-perform-command-dryRun
-#            context: rso-base
-#            requires:
-#              - orb-tools/publish-dev
+      - circleci-maven-release-orb/run-maven-release:
+            <<: *mvn-release-prepare-command-dryRun
+            <<: *mvn-release-perform-command-dryRun
+            context: rso-base
+            requires:
+              - orb-tools/publish-dev
 #      - check-results-job:
 #            requires:
 #              - circleci-maven-release-orb/run-maven-release
