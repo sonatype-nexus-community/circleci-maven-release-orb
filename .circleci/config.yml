@@ -108,9 +108,9 @@ workflows:
             context: rso-base
             requires:
               - orb-tools/publish-dev
-#      - check-results-job:
-#            requires:
-#              - circleci-maven-release-orb/run-maven-release
+      - check-results-job:
+            requires:
+              - circleci-maven-release-orb/run-maven-release
 
 #      - orb-tools/publish:
 #          orb-path: src/orb.yml
