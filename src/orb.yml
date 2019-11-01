@@ -19,10 +19,10 @@ deploy-defaults: &JOB_DEPLOY_DEFAULTS
       default: maven-executor
     mvn-release-prepare-command:
       type: string
-      default: mvn --batch-mode release:prepare
+      default: mvn --batch-mode -DdryRun=$dryRun release:prepare
     mvn-release-perform-command:
       type: string
-      default: mvn --batch-mode release:perform -s .circleci/.maven.xml
+      default: mvn --batch-mode -DdryRun=$dryRun release:perform -s .circleci/.maven.xml
   executor: <<parameters.executor>>
 
 commands:
@@ -67,6 +67,8 @@ commands:
             echo "Starting new release..."
             MVN_VERSION=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec)
             echo "Preparing release from version ${MVN_VERSION}..."
+            #echo '<< parameters.mvn-release-prepare-command >>'
+            #exit 1
             << parameters.mvn-release-prepare-command >>
             echo "Generated release.properties: ..."
             cat release.properties
