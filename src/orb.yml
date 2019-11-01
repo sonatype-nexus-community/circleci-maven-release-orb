@@ -74,10 +74,6 @@ commands:
             echo "Release completed"
             MVN_VERSION_NEXT_DEV=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec)
             echo "New development version ${MVN_VERSION_NEXT_DEV}"
-      #- persist_to_workspace:
-      #    root: .
-      #    paths:
-      #      - .
       - persist_to_workspace:
           root: ~
           paths:
