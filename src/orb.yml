@@ -79,10 +79,10 @@ commands:
       #    paths:
       #      - .
       - persist_to_workspace:
-          root: /
+          root: ~
           paths:
             # cached only for testing - don't cache secret stuff
-            - home/circleci/.gnupg/pubring.kbx
+            - .gnupg/pubring.kbx
       - save_cache:
           paths:
             - ~/.m2
