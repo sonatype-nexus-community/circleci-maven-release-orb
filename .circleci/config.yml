@@ -10,7 +10,7 @@ jobs:
     environment:
       dryRun: true
     steps:
-      #- checkout
+      - checkout
       - attach_workspace:
           at: .
       - restore_cache:
