@@ -83,7 +83,6 @@ commands:
             - ~/.m2
             # cached only for testing - don't cache secret stuff
             - ~/.gnupg/pubring.kbx
-
           key: maven-release-orb-{{ checksum ".circleci/config.yml" }}
 
 jobs:
