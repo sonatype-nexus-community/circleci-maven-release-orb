@@ -19,10 +19,6 @@ jobs:
       - run:
           name: Check results
           command: |
-            pwd
-            ls -alh
-            ls -alh /home/circleci/
-            ls -alh /home/circleci/.gitconfig
             FAILED_CHECK=false
             echo "Checking gpg setup..."
             gpgDir=/home/circleci/.gnupg
@@ -53,12 +49,11 @@ jobs:
               FAILED_CHECK=true
             fi
 
-
-            releasePropsFile=release.properties
-            if [ ! -f "releasePropsCreated" ]; then
-              echo "Missing release properties file creation marker: releasePropsCreated"
-              FAILED_CHECK=true
-            fi
+            #releasePropsFile=release.properties
+            #if [ ! -f "releasePropsCreated" ]; then
+            #  echo "Missing release properties file creation marker: releasePropsCreated"
+            #  FAILED_CHECK=true
+            #fi
 
             if [ "$FAILED_CHECK" = true ]; then
               echo "Exiting with failure: $FAILED_CHECK"

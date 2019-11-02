@@ -69,7 +69,7 @@ commands:
             echo "Preparing release from version ${MVN_VERSION}..."
             << parameters.mvn-release-prepare-command >>
             if [ -f "release.properties" ]; then
-              echo "true" >> releasePropsCreated
+              #echo "true" >> releasePropsCreated
               echo "Generated release.properties: ..."
               cat release.properties
             fi
