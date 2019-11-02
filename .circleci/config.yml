@@ -25,7 +25,7 @@ jobs:
             FAILED_CHECK=false
             echo "Checking gpg setup..."
             gpgDir=/home/circleci/.gnupg
-            if [ ! -f "$gpgDir" ]; then
+            if [ ! -f "$gpgDir"/ ]; then
               echo "Missing gpg dir: $gpgDir"
               FAILED_CHECK=true
             fi
@@ -41,11 +41,12 @@ jobs:
               echo "Missing knownHosts file: $knownHosts"
               FAILED_CHECK=true
             fi
-            idRsa=~/.ssh/id_rsa
-            if [ ! -f "$idRsa" ]; then
-              echo "Missing knownHosts file: idRsa"
-              FAILED_CHECK=true
-            fi
+            # this is senstive, so don't cache or check it
+            #idRsa=~/.ssh/id_rsa
+            #if [ ! -f "$idRsa" ]; then
+            #  echo "Missing knownHosts file: $idRsa"
+            #  FAILED_CHECK=true
+            #fi
             gitUser=$(git config user.name)
             if [ ! "$gitUser" = "$GITHUB_USERNAME" ]; then
               echo "Missing git user name: $gitUser"
