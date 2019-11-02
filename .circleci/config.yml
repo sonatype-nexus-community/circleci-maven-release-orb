@@ -92,16 +92,19 @@ workflows:
             - orb-tools/pack
 
       # integration tests
-#      - circleci-maven-release-orb/run-maven-release:
-#            <<: *mvn-read-version-command-dryRun-custom
-#            <<: *mvn-release-prepare-command-dryRun-custom
-#            <<: *mvn-release-perform-command-dryRun-custom
-#            context: rso-base
-#            requires:
-#              - orb-tools/publish-dev
-#      - check-results-job:
-#            requires:
-#              - circleci-maven-release-orb/run-maven-release
+      # NOTE: When the Orb parameters change drastically, you may need to temporarily comment out this IT section to
+      # allow the build to republish the new dev Orb. After a CI run completes with this IT section, you can restore
+      # this IT section. Another approach may be to manually republish the dev Orb from you local machine when needed.
+      - circleci-maven-release-orb/run-maven-release:
+            <<: *mvn-read-version-command-dryRun-custom
+            <<: *mvn-release-prepare-command-dryRun-custom
+            <<: *mvn-release-perform-command-dryRun-custom
+            context: rso-base
+            requires:
+              - orb-tools/publish-dev
+      - check-results-job:
+            requires:
+              - circleci-maven-release-orb/run-maven-release
 
 #      - orb-tools/publish:
 #          orb-path: src/orb.yml
