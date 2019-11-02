@@ -60,13 +60,14 @@ jobs:
               exit 1
             fi
 
-mvn-release-prepare-command: &mvn-release-prepare-command-dryRun
-  # add -DdryRun=true
-  mvn-release-prepare-command: mvn --batch-mode -DdryRun=true release:prepare
+mvn-read-version-command: &mvn-read-version-command-dryRun-custom
+  mvn-read-version-command: mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec -f test/pom.xml
 
-mvn-release-perform-command: &mvn-release-perform-command-dryRun
-  # add -DdryRun=true
-  mvn-release-perform-command: mvn --batch-mode -DdryRun=true release:perform
+mvn-release-prepare-command: &mvn-release-prepare-command-dryRun-custom
+  mvn-release-prepare-command: mvn --batch-mode release:prepare -DdryRun=true -f test/pom.xml
+
+mvn-release-perform-command: &mvn-release-perform-command-dryRun-custom
+  mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s test/.maven.xml -f test/pom.xml
 
 workflows:
   lint_pack-validate_publish-dev:
@@ -92,8 +93,9 @@ workflows:
 
       # integration tests
       - circleci-maven-release-orb/run-maven-release:
-            <<: *mvn-release-prepare-command-dryRun
-            <<: *mvn-release-perform-command-dryRun
+            <<: *mvn-read-version-command-dryRun-custom
+            <<: *mvn-release-prepare-command-dryRun-custom
+            <<: *mvn-release-perform-command-dryRun-custom
             context: rso-base
             requires:
               - orb-tools/publish-dev
