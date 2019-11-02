@@ -55,8 +55,8 @@ jobs:
 
 
             releasePropsFile=release.properties
-            if [ ! -f "$releasePropsFile" ]; then
-              echo "Missing release properties file: $releasePropsFile"
+            if [ ! -f "releasePropsCreated" ]; then
+              echo "Missing release properties file creation marker: releasePropsCreated"
               FAILED_CHECK=true
             fi
 

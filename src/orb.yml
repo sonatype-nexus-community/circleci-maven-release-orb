@@ -68,8 +68,11 @@ commands:
             MVN_VERSION=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec)
             echo "Preparing release from version ${MVN_VERSION}..."
             << parameters.mvn-release-prepare-command >>
-            echo "Generated release.properties: ..."
-            cat release.properties
+            if [ -f "release.properties" ]; then
+              echo "true" >> releasePropsCreated
+              echo "Generated release.properties: ..."
+              cat release.properties
+            fi
             << parameters.mvn-release-perform-command >>
             echo "Release completed"
             MVN_VERSION_NEXT_DEV=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec)
