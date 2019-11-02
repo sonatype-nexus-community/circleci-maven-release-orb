@@ -5,8 +5,7 @@ orbs:
 
 jobs:
   check-results-job:
-    docker:
-      - image: circleci/openjdk:8-jdk
+    executor: circleci-maven-release-orb/maven-executor
     steps:
       #- checkout
       - attach_workspace:
