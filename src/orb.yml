@@ -24,6 +24,8 @@ description: >
 
   The pom must define a 'developerConnection' tag in the 'scm' section.
   The following 'distributionManagement', 'build' and 'profile' definitions are also required.
+  An example of such a maven pom file is here:
+    https://github.com/sonatype-nexus-community/circleci-maven-release-orb/blob/master/pom.xml
 
   <scm>
     <developerConnection>scm:git:git@github.com:bhamail/test-circleci-maven-release.git</developerConnection>
@@ -85,6 +87,8 @@ description: >
 
   The Orb also expects to find the maven settings file `.circleci/.maven.xml` in the project root.
   You can override the location of this maven settings file by redefining the `mvn-release-perform-command` anchor.
+  An example of such a maven settings file is here:
+    https://github.com/sonatype-nexus-community/circleci-maven-release-orb/blob/master/.circleci/.maven.xml
 
   <settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/SETTINGS/1.0.0" xsi:schemalocation="http://maven.apache.org/SETTINGS/1.0.0
                         http://maven.apache.org/xsd/settings-1.0.0.xsd">
