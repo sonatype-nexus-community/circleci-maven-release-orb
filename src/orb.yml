@@ -101,49 +101,49 @@ description: >
       </server>
     </servers>
 
-examples:
-  maven-release-example:
-    description: |
-      The configuration below will use the maven-release-plugin to perform a maven release.
-    usage:
-      version: 2.1
-      orbs:
-        circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@dev:alpha
-      workflows:
-        main:
-          jobs:
-            - circleci-maven-release-orb/run-maven-release:
+#examples:
+#  maven-release-example:
+#    description: |
+#      The configuration below will use the maven-release-plugin to perform a maven release.
+#    usage:
+#      version: 2.1
+#      orbs:
+#        circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@dev:alpha
+#      workflows:
+#        main:
+#          jobs:
+#            - circleci-maven-release-orb/run-maven-release:
+#
+#  maven-release-dry-run-example:
+#    description: |
+#      The configuration below will use the maven-release-plugin to perform a "dry run" of a maven release.
+#      No changes will be committed to source control.
+#    usage:
+#      version: 2.1
+#      orbs:
+#        circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@dev:alpha
+#      workflows:
+#        main:
+#          jobs:
+#            - circleci-maven-release-orb/run-maven-release:
 
-  maven-release-dry-run-example:
-    description: |
-      The configuration below will use the maven-release-plugin to perform a "dry run" of a maven release.
-      No changes will be committed to source control.
-    usage:
-      version: 2.1
-      orbs:
-        circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@dev:alpha
-      workflows:
-        main:
-          jobs:
-            - circleci-maven-release-orb/run-maven-release:
-
-  maven-release-dry-run-custom-maven-settings-example:
-    description: |
-      The configuration below will perform a "dry run" using a settings file in a different location
-      by redefining the `mvn-release-perform-command` anchor.
-    usage:
-      version: 2.1
-      orbs:
-        circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@dev:alpha
-
-      mvn-release-perform-command: &mvn-release-perform-command-dryRun-mysettings
-        mvn-release-perform-command: mvn --batch-mode -DdryRun=true release:perform -s my-settings.xml
-
-      workflows:
-        main:
-          jobs:
-            - circleci-maven-release-orb/run-maven-release:
-                <<: *mvn-release-perform-command-dryRun-mysettings
+#  maven-release-dry-run-custom-maven-settings-example:
+#    description: |
+#      The configuration below will perform a "dry run" using a settings file in a different location
+#      by redefining the `mvn-release-perform-command` anchor.
+#    usage:
+#      version: 2.1
+#      orbs:
+#        circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@dev:alpha
+#
+#      mvn-release-perform-command: &mvn-release-perform-command-dryRun-mysettings
+#        mvn-release-perform-command: mvn --batch-mode -DdryRun=true release:perform -s my-settings.xml
+#
+#      workflows:
+#        main:
+#          jobs:
+#            - circleci-maven-release-orb/run-maven-release:
+#                <<: *mvn-release-perform-command-dryRun-mysettings
 
 executors:
   maven-executor:
