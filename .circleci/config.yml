@@ -92,16 +92,16 @@ workflows:
             - orb-tools/pack
 
       # integration tests
-      - circleci-maven-release-orb/run-maven-release:
-            <<: *mvn-read-version-command-dryRun-custom
-            <<: *mvn-release-prepare-command-dryRun-custom
-            <<: *mvn-release-perform-command-dryRun-custom
-            context: rso-base
-            requires:
-              - orb-tools/publish-dev
-      - check-results-job:
-            requires:
-              - circleci-maven-release-orb/run-maven-release
+#      - circleci-maven-release-orb/run-maven-release:
+#            <<: *mvn-read-version-command-dryRun-custom
+#            <<: *mvn-release-prepare-command-dryRun-custom
+#            <<: *mvn-release-perform-command-dryRun-custom
+#            context: rso-base
+#            requires:
+#              - orb-tools/publish-dev
+#      - check-results-job:
+#            requires:
+#              - circleci-maven-release-orb/run-maven-release
 
 #      - orb-tools/publish:
 #          orb-path: src/orb.yml
