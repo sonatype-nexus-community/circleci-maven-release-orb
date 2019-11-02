@@ -43,12 +43,12 @@ jobs:
               FAILED_CHECK=true
             fi
             gitUser=$(git config user.name)
-            if [ ! "$gitUser" = "$GITHUB_USERNAME" ]; then
+            if [ "$gitUser" != "$GITHUB_USERNAME" ]; then
               echo "Missing git user name: $gitUser"
               FAILED_CHECK=true
             fi
             gitEmail=$(git config user.email)
-            if [ ! "$gitEmail" = "$GITHUB_EMAIL" ]; then
+            if [ "$gitEmail" != "$GITHUB_EMAIL" ]; then
               echo "Missing git email address: $gitEmail"
               FAILED_CHECK=true
             fi
