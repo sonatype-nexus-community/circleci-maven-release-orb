@@ -134,6 +134,7 @@ examples:
     description: |
       The configuration below will perform a "dry run" using a maven settings file in a different location
       by redefining the `mvn-release-perform-command` anchor.
+      No changes will be committed to source control.
     usage:
       version: 2.1
 
@@ -152,8 +153,10 @@ examples:
 
   maven-release-dry-run-custom-pom-and-settings-example:
     description: |
-      The configuration below will perform a "dry run" using a maven settings file in a different location
-      by redefining the `mvn-release-perform-command` anchor.
+      The configuration below will perform a "dry run" using a maven custommized pom file
+      by redefining the `mvn-read-version-command`, `mvn-release-prepare-command`, and `mvn-release-perform-command`
+      anchors.
+      No changes will be committed to source control.
     usage:
       version: 2.1
 
