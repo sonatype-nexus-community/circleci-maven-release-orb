@@ -113,7 +113,7 @@ workflows:
           publish-token-variable: "CIRCLE_TOKEN"
           validate: true
 
-      - hold-publish:
+      - approve-release:
           type: approval
           requires:
             - orb-tools/publish
@@ -123,4 +123,4 @@ workflows:
           orb-name: sonatype-nexus-community/circleci-maven-release-orb
           ssh-fingerprints: "b7:5b:6c:b5:81:8e:dc:2b:fd:fe:27:34:a7:96:d7:22"
           requires:
-            - hold-publish
+            - approve-release
