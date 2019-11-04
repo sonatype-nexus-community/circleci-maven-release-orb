@@ -30,7 +30,8 @@ See the [demo](https://github.com/sonatype-nexus-community-circleci/circleci-mav
 There are a number of examples in the Orb documentation 
 (see the [Example source code](https://github.com/sonatype-nexus-community/circleci-maven-release-orb/blob/master/src/orb.yml#L104)).
 
-The simplest example of a CircleCI `config.yml` file is duplicated below:
+The [simplest example](https://github.com/sonatype-nexus-community/circleci-maven-release-orb/blob/master/src/orb.yml#L105)
+ of a CircleCI `config.yml` file is duplicated below:
 
       version: 2.1
 
