@@ -1,12 +1,11 @@
 version: 2.1
-description: >
+description: |
   Run the maven-release-plugin in CircleCI. This Orb allows publishing of build
   artifacts by invoking the maven-release-plugin. See: https://maven.apache.org/maven-release/maven-release-plugin/
   The source for this Orb is available at: https://github.com/sonatype-nexus-community/circleci-maven-release-orb
   Large chunks taken from this excellent Orb: https://github.com/bbottema-circleci/circleci-orbs
   Thanks Benny!
 
-  yadda
   Since may of the ideas in this Orb are taken from Benny's Orb, you may want to see
   http://www.bennybottema.com/2019/02/20/automating-your-github-library-releases-to-maven-central/ to find out
   more about the steps performed and which environment variables are expected in the Context.
