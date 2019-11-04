@@ -20,6 +20,38 @@ A CircleCI [Orb](https://circleci.com/docs/2.0/orb-intro/) than can be used to d
 
 Status: Waaaay Alpha!
 
+#### Orb Information
+This Orb will be (is?) published to `sonatype-nexus-community/circleci-maven-release-orb`. See the [orb page](https://circleci.com/orbs/registry/orb/sonatype-nexus-community/circleci-maven-release-orb) for the latest version.
+<!--
+See the [demo](https://github.com/sonatype-nexus-community-circleci/circleci-maven-release-orb-demo) on the Sonatype Community site for a working example.
+-->
+#### How to use the Maven Release Orb in your config.yml
+
+There are a number of examples in the Orb documentation 
+(see the [Example source code](https://github.com/sonatype-nexus-community/circleci-maven-release-orb/blob/master/src/orb.yml#L104)).
+
+The simplest example of a CircleCI `config.yml` file is duplicated below:
+
+      version: 2.1
+
+      orbs:
+        circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@x.y.z
+
+      workflows:
+        main:
+          jobs:
+            - circleci-maven-release-orb/run-maven-release
+
+You would replace `x.y.z` with a real version.
+To use the latest development version of the Orb, replace `x.y.z` with `dev:alpha`.
+
+While experimenting with this plugin, you should use the 
+[Dry Run example](https://github.com/sonatype-nexus-community/circleci-maven-release-orb/blob/master/src/orb.yml#L118) 
+to avoid creating a bunch of spurious releases.
+
+The [Orb Description section](https://github.com/sonatype-nexus-community/circleci-maven-release-orb/blob/master/src/orb.yml#L2) 
+documents additional requirements for using this Orb.
+ 
 ## The Fine Print
 
 It is worth noting that this is **NOT SUPPORTED** by Sonatype, and is a contribution of ours
