@@ -6,11 +6,11 @@ description: |
   Large chunks taken from this excellent Orb: https://github.com/bbottema-circleci/circleci-orbs
   Thanks Benny!
 
-  Since may of the ideas in this Orb are taken from Benny's Orb, you may want to see
+  Since many of the ideas in this Orb are taken from Benny's Orb, you may want to see
   http://www.bennybottema.com/2019/02/20/automating-your-github-library-releases-to-maven-central/ to find out
   more about the steps performed and which environment variables are expected in the Context.
 
-  The following environmental variables are expected by this Orb, which are unique for each project:
+  The following environment variables are expected by this Orb, which are unique for each project:
     - GITHUB_COMMIT_KEY: base64 private SSH key, matching the public key (with write access) in your Github project
     - GITHUB_USERNAME: Your Github username
     - GITHUB_EMAIL: Your Github email
@@ -20,7 +20,7 @@ description: |
     - SERVER_OSSRH_PASSWORD: OSS Sonatype username
     - SERVER_OSSRH_USERNAME: OSS Sonatype password
 
-  The pom.xml at the root of you project also requires a few tags:
+  The pom.xml at the root of your project also requires a few tags:
 
   The pom must define a 'developerConnection' tag in the 'scm' section.
   The following 'distributionManagement', 'build' and 'profile' definitions are also required.
