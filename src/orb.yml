@@ -114,7 +114,7 @@ description: |
     main:
       jobs:
         - circleci-maven-release-orb/run-maven-release:
-            <<: &mvn-release-perform-command-dryRun
+            <<: *mvn-release-perform-command-dryRun
 
 
 examples:
@@ -150,7 +150,7 @@ examples:
         main:
           jobs:
             - circleci-maven-release-orb/run-maven-release:
-                <<: &mvn-release-perform-command-dryRun
+                <<: *mvn-release-perform-command-dryRun
 
   maven-release-dry-run-custom-maven-settings-example:
     description: |
