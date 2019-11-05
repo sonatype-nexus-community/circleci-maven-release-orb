@@ -212,6 +212,14 @@ deploy-defaults: &JOB_DEPLOY_DEFAULTS
     executor:
       type: executor
       default: maven-executor
+    ssh-fingerprints:
+      default: ''
+      description: >
+        Fingerprints for SSH deploy key (add the public key as a read/write key on
+        GitHub; add the private key in CircleCI via SSH Permissions, with
+        github.com as Hostname). Used to push a git tag back to the project's
+        repository.
+      type: string
     mvn-read-version-command:
       type: string
       default: mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec
@@ -234,19 +242,15 @@ commands:
   configure-git:
     steps:
       - run:
-          name: Configure GIT with host fingerprint, user info and SSH key for pushing
+          name: Configure GIT with user info for pushing
           command: |
-            mkdir -p ~/.ssh
-            echo "Adding github.com as known host..."
-            echo $GITHUB_FINGERPRINT >> ~/.ssh/known_hosts
-            echo "Setting private SSH key for pushing new version to repo..."
-            echo $GITHUB_COMMIT_KEY | base64 --decode >> ~/.ssh/id_rsa
-            chmod 400 ~/.ssh/id_rsa # prevents "UNPROTECTED PRIVATE KEY FILE" error
             git config user.name "$GITHUB_USERNAME"
             git config user.email "$GITHUB_EMAIL"
 
   maven-release:
     parameters:
+      ssh-fingerprints:
+        type: string
       mvn-read-version-command:
         type: string
       mvn-release-prepare-command:
@@ -254,6 +258,9 @@ commands:
       mvn-release-perform-command:
         type: string
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - <<parameters.ssh-fingerprints>>
       - checkout
       - attach_workspace:
           at: .
@@ -267,8 +274,6 @@ commands:
             echo "Starting new release..."
             MVN_VERSION=$(<< parameters.mvn-read-version-command >>)
             echo "Preparing release from version ${MVN_VERSION}..."
-            echo "Removing existing keys before git push..."
-            ssh-add -D
             << parameters.mvn-release-prepare-command >>
             if [ -f "release.properties" ]; then
               #echo "true" >> releasePropsCreated
@@ -298,6 +303,7 @@ jobs:
     <<: *JOB_DEPLOY_DEFAULTS
     steps:
       - maven-release:
+          ssh-fingerprints: << parameters.ssh-fingerprints >>
           mvn-read-version-command: << parameters.mvn-read-version-command >>
           mvn-release-prepare-command: << parameters.mvn-release-prepare-command >>
           mvn-release-perform-command: << parameters.mvn-release-perform-command >>
