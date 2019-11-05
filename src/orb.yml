@@ -225,7 +225,7 @@ deploy-defaults: &JOB_DEPLOY_DEFAULTS
       default: mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec
     mvn-release-prepare-command:
       type: string
-      default: mvn --batch-mode release:prepare
+      default: mvn --batch-mode release:prepare -DscmCommentPrefix="[skip ci] [maven-release-plugin]"
     mvn-release-perform-command:
       type: string
       default: mvn --batch-mode release:perform -s .circleci/.maven.xml
