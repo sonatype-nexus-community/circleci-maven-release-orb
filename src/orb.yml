@@ -267,6 +267,8 @@ commands:
             echo "Starting new release..."
             MVN_VERSION=$(<< parameters.mvn-read-version-command >>)
             echo "Preparing release from version ${MVN_VERSION}..."
+            echo "Removing existing keys before git push..."
+            ssh-add -D
             << parameters.mvn-release-prepare-command >>
             if [ -f "release.properties" ]; then
               #echo "true" >> releasePropsCreated
