@@ -11,10 +11,8 @@ description: |
   more about the steps performed and which environment variables are expected in the Context.
 
   The following environment variables are expected by this Orb, which are unique for each project:
-    - GITHUB_COMMIT_KEY: base64 private SSH key, matching the public key (with write access) in your Github project
     - GITHUB_USERNAME: Your Github username
     - GITHUB_EMAIL: Your Github email
-    - GITHUB_FINGERPRINT: Github's server fingerprint so SSH can trust this host
     - GPG_PASSPHRASE: Password used for signing artifacts with GPG
     - SECRING_GPG_ASC_BASE64: Base64 GPG ASCII keyring
     - SERVER_OSSRH_PASSWORD: OSS Sonatype username
