@@ -291,7 +291,6 @@ commands:
             - ~/.m2
             # cached only for testing - don't cache secret stuff
             - ~/.gnupg/pubring.kbx
-            - ~/.ssh/known_hosts
             - ~/.gitconfig
             - releasePropsCreated
           key: maven-release-orb-{{ checksum ".circleci/config.yml" }}

@@ -7,14 +7,10 @@ jobs:
   check-results-job:
     executor: circleci-maven-release-orb/maven-executor
     steps:
-      #- checkout
       - attach_workspace:
           at: .
-      #- restore_cache:
-      #    key: maven-release-orb-{{ checksum ".circleci/config.yml" }}
-      #- my-inline-maven-release-orb/run-maven-release
-      #- circleci-maven-release-orb/run-maven-release
-      #- run-maven-release
+      - restore_cache:
+          key: maven-release-orb-{{ checksum ".circleci/config.yml" }}
       - run:
           name: Check results
           command: |
