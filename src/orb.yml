@@ -141,14 +141,11 @@ examples:
       orbs:
         circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@x.y.z
 
-      mvn-release-perform-command: &mvn-release-perform-command-dryRun
-        mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s .circleci/.maven.xml
-
       workflows:
         main:
           jobs:
             - circleci-maven-release-orb/run-maven-release:
-                <<: *mvn-release-perform-command-dryRun
+                mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s .circleci/.maven.xml
 
   maven-release-dry-run-custom-maven-settings-example:
     description: |
@@ -161,15 +158,12 @@ examples:
       orbs:
         circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@x.y.z
 
-      # custom settings.xml file
-      mvn-release-perform-command: &mvn-release-perform-command-dryRun-mysettings
-        mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s my-settings.xml
-
       workflows:
         main:
           jobs:
             - circleci-maven-release-orb/run-maven-release:
-                <<: *mvn-release-perform-command-dryRun-mysettings
+                # custom settings.xml file
+                mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s my-settings.xml
 
   maven-release-dry-run-custom-pom-and-settings-example:
     description: |
@@ -183,21 +177,14 @@ examples:
       orbs:
         circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@x.y.z
 
-      # custom pom.xml - requires redefining all the maven commands
-      mvn-read-version-command: &mvn-read-version-command-dryRun-mypom
-        mvn-read-version-command: mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec -f my-pom.xml
-      mvn-release-prepare-command: &mvn-release-prepare-command-dryRun-mypom
-        mvn-release-prepare-command: mvn --batch-mode release:prepare -DscmCommentPrefix="[skip ci] [maven-release-plugin] " -DdryRun=true -f my-pom.xml
-      mvn-release-perform-command: &mvn-release-perform-command-dryRun-mypom
-        mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s .circleci/.maven.xml -f my-pom.xml
-
       workflows:
         main:
           jobs:
             - circleci-maven-release-orb/run-maven-release:
-                <<: *mvn-read-version-command-dryRun-mypom
-                <<: *mvn-release-prepare-command-dryRun-mypom
-                <<: *mvn-release-perform-command-dryRun-mypom
+                # custom pom.xml - requires redefining all the maven commands
+                mvn-read-version-command: mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec -f my-pom.xml
+                mvn-release-prepare-command: mvn --batch-mode release:prepare -DscmCommentPrefix="[skip ci] [maven-release-plugin] " -DdryRun=true -f my-pom.xml
+                mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s .circleci/.maven.xml -f my-pom.xml
 
 executors:
   maven-executor:
