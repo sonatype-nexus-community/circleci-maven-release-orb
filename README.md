@@ -21,8 +21,9 @@ A CircleCI [Orb](https://circleci.com/docs/2.0/orb-intro/) than can be used to d
 Status: Waaaay Alpha!
 
 #### Orb Information
-This Orb will be (is?) published to `sonatype-nexus-community/circleci-maven-release-orb`. See the [orb page](https://circleci.com/orbs/registry/orb/sonatype-nexus-community/circleci-maven-release-orb) for the latest version.
+This Orb is published to `sonatype-nexus-community/circleci-maven-release-orb`. See the [orb page](https://circleci.com/orbs/registry/orb/sonatype-nexus-community/circleci-maven-release-orb) for the latest version.
 <!--
+ TODO: add demo project to community
 See the [demo](https://github.com/sonatype-nexus-community-circleci/circleci-maven-release-orb-demo) on the Sonatype Community site for a working example.
 -->
 #### How to use the Maven Release Orb in your config.yml
