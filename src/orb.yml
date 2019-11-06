@@ -100,7 +100,7 @@ description: |
     </servers>
 
   Note: In the examples below, the yml has already substituted the "anchor" values. Please see the original
-  yml source file [examples](https://github.com/sonatype-nexus-community/circleci-maven-release-orb/blob/master/src/orb.yml#L120)
+  yml source file [examples](https://github.com/sonatype-nexus-community/circleci-maven-release-orb/blob/master/src/orb.yml#L118)
   section to view the intended formatting for the examples. (Any help on how to fix this is welcome!)
   To illustration the issue, the `maven-release-dry-run-example` below should show:
 
