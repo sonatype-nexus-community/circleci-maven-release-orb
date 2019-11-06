@@ -106,23 +106,3 @@ workflows:
           ssh-fingerprints: "b7:5b:6c:b5:81:8e:dc:2b:fd:fe:27:34:a7:96:d7:22"
           requires:
             - approve-release
-
-  increment-patch:
-    jobs:
-      - orb-tools/publish:
-          orb-path: src/orb.yml
-          orb-ref: sonatype-nexus-community/circleci-maven-release-orb@dev:${CIRCLE_BRANCH}
-          publish-token-variable: "CIRCLE_TOKEN"
-          validate: true
-
-      - approve-release:
-          type: approval
-          requires:
-            - orb-tools/publish
-
-      - orb-tools/increment:
-          name: increment-patch
-          orb-path: src/orb.yml
-          orb-ref: sonatype-nexus-community/circleci-maven-release-orb
-          requires:
-            - approve-release
