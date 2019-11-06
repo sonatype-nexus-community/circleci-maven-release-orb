@@ -27,12 +27,7 @@ jobs:
               FAILED_CHECK=true
             fi
 
-            echo "Checking git setup...known_hosts should fail"
-            knownHosts=~/.ssh/known_hosts
-            if [ ! -f "$knownHosts" ]; then
-              echo "Missing knownHosts file: $knownHosts"
-              FAILED_CHECK=true
-            fi
+            echo "Checking git setup..."
             gitUser=$(git config user.name)
             if [ -z "$gitUser" ]; then
               echo "Missing git user name: $gitUser"
