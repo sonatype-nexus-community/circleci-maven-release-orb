@@ -50,15 +50,6 @@ jobs:
               exit 1
             fi
 
-mvn-read-version-command: &mvn-read-version-command-dryRun-custom
-  mvn-read-version-command: mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec -f test/pom.xml
-
-mvn-release-prepare-command: &mvn-release-prepare-command-dryRun-custom
-  mvn-release-prepare-command: mvn --batch-mode release:prepare -DdryRun=true -f test/pom.xml
-
-mvn-release-perform-command: &mvn-release-perform-command-dryRun-custom
-  mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s test/.maven.xml -f test/pom.xml
-
 workflows:
   lint_pack-validate_publish-dev:
     jobs:
@@ -86,9 +77,9 @@ workflows:
       # allow the build to republish the new dev Orb. After a CI run completes with this IT section, you can restore
       # this IT section. Another approach may be to manually republish the dev Orb from you local machine when needed.
       - circleci-maven-release-orb/run-maven-release:
-            <<: *mvn-read-version-command-dryRun-custom
-            <<: *mvn-release-prepare-command-dryRun-custom
-            <<: *mvn-release-perform-command-dryRun-custom
+            mvn-read-version-command: mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec -f test/pom.xml
+            mvn-release-prepare-command: mvn --batch-mode release:prepare -DdryRun=true -f test/pom.xml
+            mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s test/.maven.xml -f test/pom.xml
             context: rso-base
             requires:
               - orb-tools/publish-dev
@@ -96,7 +87,7 @@ workflows:
             requires:
               - circleci-maven-release-orb/run-maven-release
 
-  shipit:
+  promote-patch:
     jobs:
       - orb-tools/publish:
           orb-path: src/orb.yml
@@ -113,5 +104,24 @@ workflows:
           name: dev-promote-patch
           orb-name: sonatype-nexus-community/circleci-maven-release-orb
           ssh-fingerprints: "b7:5b:6c:b5:81:8e:dc:2b:fd:fe:27:34:a7:96:d7:22"
+          requires:
+            - approve-release
+
+  increment-patch:
+    jobs:
+      - orb-tools/publish:
+          orb-path: src/orb.yml
+          orb-ref: sonatype-nexus-community/circleci-maven-release-orb@dev:${CIRCLE_BRANCH}
+          publish-token-variable: "CIRCLE_TOKEN"
+          validate: true
+
+      - approve-release:
+          type: approval
+          requires:
+            - orb-tools/publish
+
+      - orb-tools/increment:
+          name: increment-patch
+          orb-ref: sonatype-nexus-community/circleci-maven-release-orb
           requires:
             - approve-release
