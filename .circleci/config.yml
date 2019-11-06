@@ -122,6 +122,7 @@ workflows:
 
       - orb-tools/increment:
           name: increment-patch
+          orb-path: src/orb.yml
           orb-ref: sonatype-nexus-community/circleci-maven-release-orb
           requires:
             - approve-release
