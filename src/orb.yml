@@ -187,7 +187,7 @@ examples:
       mvn-read-version-command: &mvn-read-version-command-dryRun-mypom
         mvn-read-version-command: mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec -f my-pom.xml
       mvn-release-prepare-command: &mvn-release-prepare-command-dryRun-mypom
-        mvn-release-prepare-command: mvn --batch-mode release:prepare -DscmCommentPrefix="[skip ci] [maven-release-plugin]" -DdryRun=true -f my-pom.xml
+        mvn-release-prepare-command: mvn --batch-mode release:prepare -DscmCommentPrefix="[skip ci] [maven-release-plugin] " -DdryRun=true -f my-pom.xml
       mvn-release-perform-command: &mvn-release-perform-command-dryRun-mypom
         mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s .circleci/.maven.xml -f my-pom.xml
 
@@ -223,7 +223,7 @@ deploy-defaults: &JOB_DEPLOY_DEFAULTS
       default: mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec
     mvn-release-prepare-command:
       type: string
-      default: mvn --batch-mode release:prepare -DscmCommentPrefix="[skip ci] [maven-release-plugin]"
+      default: mvn --batch-mode release:prepare -DscmCommentPrefix="[skip ci] [maven-release-plugin] "
     mvn-release-perform-command:
       type: string
       default: mvn --batch-mode release:perform -s .circleci/.maven.xml
