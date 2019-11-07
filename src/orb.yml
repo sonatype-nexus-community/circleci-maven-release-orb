@@ -99,22 +99,6 @@ description: |
       </server>
     </servers>
 
-  Note: In the examples below, the yml has already substituted the "anchor" values. Please see the original
-  yml source file [examples](https://github.com/sonatype-nexus-community/circleci-maven-release-orb/blob/master/src/orb.yml#L118)
-  section to view the intended formatting for the examples. (Any help on how to fix this is welcome!)
-  To illustrate the issue, the `maven-release-dry-run-example` below should show:
-
-  ...
-  mvn-release-perform-command: &mvn-release-perform-command-dryRun
-    mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s .circleci/.maven.xml
-
-  workflows:
-    main:
-      jobs:
-        - circleci-maven-release-orb/run-maven-release:
-            <<: *mvn-release-perform-command-dryRun
-
-
 examples:
   maven-release-example:
     description: The configuration below will use the maven-release-plugin to perform a maven release.
@@ -150,7 +134,7 @@ examples:
   maven-release-dry-run-custom-maven-settings-example:
     description: |
       The configuration below will perform a "dry run" using a maven settings file in a different location
-      by redefining the `mvn-release-perform-command` anchor.
+      by redefining the `mvn-release-perform-command` command.
       No changes will be committed to source control.
     usage:
       version: 2.1
@@ -162,14 +146,13 @@ examples:
         main:
           jobs:
             - circleci-maven-release-orb/run-maven-release:
-                # custom settings.xml file
                 mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s my-settings.xml
 
   maven-release-dry-run-custom-pom-and-settings-example:
     description: |
       The configuration below will perform a "dry run" using a maven custommized pom file
       by redefining the `mvn-read-version-command`, `mvn-release-prepare-command`, and `mvn-release-perform-command`
-      anchors.
+      commands.
       No changes will be committed to source control.
     usage:
       version: 2.1
@@ -181,7 +164,6 @@ examples:
         main:
           jobs:
             - circleci-maven-release-orb/run-maven-release:
-                # custom pom.xml - requires redefining all the maven commands
                 mvn-read-version-command: mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec -f my-pom.xml
                 mvn-release-prepare-command: mvn --batch-mode release:prepare -DscmCommentPrefix="[skip ci] [maven-release-plugin] " -DdryRun=true -f my-pom.xml
                 mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s .circleci/.maven.xml -f my-pom.xml
