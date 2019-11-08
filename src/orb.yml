@@ -100,7 +100,8 @@ description: |
     </servers>
 
   In order to allow the Orb to commit version increments and tag changes back to the source bank (during a non-dryRun),
-  you need to provide a GitHub deploy key with "Write Acesss".
+  you need to provide a GitHub deploy key with "Write Acesss". You configure the build to use this key via the
+  'ssh-fingerprints' parameter.
   See: [Adding an SSH Key to CircleCI](https://circleci.com/docs/2.0/add-ssh-key/?gclid=EAIaIQobChMIuN79poLb5QIVzuDICh2QSgh6EAAYASAAEgJIbfD_BwE)
   Watchout for the PEM key format issue described in that article.
 
