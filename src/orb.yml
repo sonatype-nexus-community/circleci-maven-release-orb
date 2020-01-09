@@ -159,7 +159,7 @@ examples:
 
   maven-release-dry-run-custom-pom-and-settings-example:
     description: |
-      The configuration below will perform a "dry run" using a maven custommized pom file
+      The configuration below will perform a "dry run" using a maven pom file with a customized filename (`my-pom.xml`)
       by redefining the `mvn-read-version-command`, `mvn-release-prepare-command`, and `mvn-release-perform-command`
       commands.
       No changes will be committed to source control.
