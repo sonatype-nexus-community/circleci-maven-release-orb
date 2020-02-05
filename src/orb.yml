@@ -2,7 +2,6 @@ version: 2.1
 description: |
   Run the maven-release-plugin in CircleCI. This Orb allows publishing of build
   artifacts by invoking the maven-release-plugin. See: https://maven.apache.org/maven-release/maven-release-plugin/
-  The source for this Orb is available at: https://github.com/sonatype-nexus-community/circleci-maven-release-orb
   Large chunks taken from this excellent Orb: https://github.com/bbottema-circleci/circleci-orbs
   Thanks Benny!
 
@@ -105,6 +104,9 @@ description: |
   See: [Adding an SSH Key to CircleCI](https://circleci.com/docs/2.0/add-ssh-key/?gclid=EAIaIQobChMIuN79poLb5QIVzuDICh2QSgh6EAAYASAAEgJIbfD_BwE)
   Watchout for the PEM key format issue described in that article.
 
+display:
+  source_url: "https://github.com/sonatype-nexus-community/circleci-maven-release-orb"
+
 examples:
   maven-release-example:
     description: The configuration below will use the maven-release-plugin to perform a maven release.
@@ -159,7 +161,7 @@ examples:
 
   maven-release-dry-run-custom-pom-and-settings-example:
     description: |
-      The configuration below will perform a "dry run" using a maven pom file with a customized filename (`my-pom.xml`)
+      The configuration below will perform a "dry run" using a maven custommized pom file
       by redefining the `mvn-read-version-command`, `mvn-release-prepare-command`, and `mvn-release-perform-command`
       commands.
       No changes will be committed to source control.
