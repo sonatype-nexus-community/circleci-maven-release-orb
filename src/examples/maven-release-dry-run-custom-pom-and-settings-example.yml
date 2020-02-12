@@ -1,0 +1,19 @@
+description: |
+  The configuration below will perform a "dry run" using a maven custommized pom file
+  by redefining the `mvn-read-version-command`, `mvn-release-prepare-command`, and `mvn-release-perform-command`
+  commands.
+  No changes will be committed to source control.
+usage:
+  version: 2.1
+
+  orbs:
+    circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@x.y.z
+
+  workflows:
+    main:
+      jobs:
+        - circleci-maven-release-orb/run-maven-release:
+            ssh-fingerprints: "my:ss:hf:in:ge:rp:ri:nt..."
+            mvn-read-version-command: mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec -f my-pom.xml
+            mvn-release-prepare-command: mvn --batch-mode release:prepare -DscmCommentPrefix="[skip ci] [maven-release-plugin] " -DdryRun=true -f my-pom.xml
+            mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s .circleci/.maven.xml -f my-pom.xml

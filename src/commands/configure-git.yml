@@ -1,0 +1,6 @@
+steps:
+  - run:
+      name: Configure GIT with user info for pushing
+      command: |
+        git config user.name "$GITHUB_USERNAME"
+        git config user.email "$GITHUB_EMAIL"
