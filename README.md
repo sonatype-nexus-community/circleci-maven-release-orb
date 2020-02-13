@@ -45,10 +45,10 @@ You would replace `x.y.z` with a real version.
 To use the latest development version of the Orb, replace `x.y.z` with `dev:alpha`.
 
 While experimenting with this plugin, you should use the 
-[Dry Run example](https://github.com/sonatype-nexus-community/circleci-maven-release-orb/blob/master/src/orb.yml#L118) 
+[Dry Run example](src/examples/maven-release-dry-run-example.yml) 
 to avoid creating a bunch of spurious releases.
 
-The [Orb Description section](https://github.com/sonatype-nexus-community/circleci-maven-release-orb/blob/master/src/orb.yml#L2) 
+The [Orb Description section](src/@orb.yml) 
 documents additional requirements for using this Orb.
  
 ## The Fine Print
