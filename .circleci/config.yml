@@ -158,7 +158,7 @@ workflows:
             branches:
               only: master
           attach-workspace: true
-          orb-ref: sonatype-nexus-community/circleci-maven-release-orb@dev:${CIRCLE_BRANCH}
+          orb-ref: sonatype-nexus-community/circleci-maven-release-orb
           requires:
             - approve-release
 
