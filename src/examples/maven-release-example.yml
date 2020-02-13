@@ -1,4 +1,4 @@
-description: The configuration below will use the maven-release-plugin to perform a maven release.
+description: The configuration below will use the maven-release-plugin to perform a maven release.ZZZ
 usage:
   version: 2.1
 
