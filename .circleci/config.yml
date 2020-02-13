@@ -8,7 +8,13 @@
 version: 2.1
 orbs:
   orb-tools: circleci/orb-tools@9.0
-  circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@dev:alpha
+  circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@<<pipeline.parameters.dev-orb-version>>
+
+my-orb-name: &MY_ORB_NAME
+  orb-name: sonatype-nexus-community/circleci-maven-release-orb
+
+my-orb-ref: &MY_ORB_REF
+  orb-ref: sonatype-nexus-community/circleci-maven-release-orb
 
 # Pipeline parameters
 parameters:
@@ -86,7 +92,7 @@ workflows:
       # store CIRCLE_TOKEN as a project env var or Contexts resource
       # if using Contexts, add your context below
       - orb-tools/publish-dev:
-          orb-name: sonatype-nexus-community/circleci-maven-release-orb
+          <<: *MY_ORB_NAME
           requires:
             - orb-tools/pack
 
@@ -144,18 +150,28 @@ workflows:
           requires:
             - orb-tools/lint
       - orb-tools/publish-dev:
-          orb-name: sonatype-nexus-community/circleci-maven-release-orb
+          <<: *MY_ORB_NAME
           requires:
             - orb-tools/pack
-
       - orb-tools/increment:
           filters:
             branches:
               only: master
           attach-workspace: true
-          orb-ref: sonatype-nexus-community/circleci-maven-release-orb
+          <<: *MY_ORB_REF
           requires:
             - orb-tools/publish-dev
+      - orb-tools/dev-promote-prod-from-commit-subject:
+          add-pr-comment: false
+          fail-if-semver-not-indicated: false
+          filters:
+            branches:
+              only: master
+          <<: *MY_ORB_NAME
+          publish-version-tag: true
+          ssh-fingerprints: "b7:5b:6c:b5:81:8e:dc:2b:fd:fe:27:34:a7:96:d7:22"
+          requires:
+            - approve-release
 
 #      - orb-tools/dev-promote-prod:
 #          name: dev-promote-patch

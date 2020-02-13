@@ -1,7 +1,7 @@
 description: |
   The configuration below will perform a "dry run" using a maven settings file in a different location
   by redefining the `mvn-release-perform-command` command.
-  No changes will be committed to source control.
+  No changes will be committed to source control.ZZZ
 usage:
   version: 2.1
 
