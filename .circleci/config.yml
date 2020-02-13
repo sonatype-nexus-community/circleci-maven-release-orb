@@ -172,10 +172,3 @@ workflows:
           ssh-fingerprints: "b7:5b:6c:b5:81:8e:dc:2b:fd:fe:27:34:a7:96:d7:22"
           requires:
             - orb-tools/increment
-
-#      - orb-tools/dev-promote-prod:
-#          name: dev-promote-patch
-#          orb-name: sonatype-nexus-community/circleci-maven-release-orb
-#          ssh-fingerprints: "b7:5b:6c:b5:81:8e:dc:2b:fd:fe:27:34:a7:96:d7:22"
-#          requires:
-#            - approve-release
