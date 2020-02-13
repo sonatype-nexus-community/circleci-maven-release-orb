@@ -131,7 +131,15 @@ workflows:
 
   promote-patch:
     jobs:
-      - orb-tools/lint
+      - approve-release:
+          filters:
+            branches:
+              only: master
+          type: approval
+
+      - orb-tools/lint:
+          requires:
+            - approve-release
       - orb-tools/pack:
           requires:
             - orb-tools/lint
@@ -139,19 +147,6 @@ workflows:
           orb-name: sonatype-nexus-community/circleci-maven-release-orb
           requires:
             - orb-tools/pack
-      - orb-tools/publish:
-          attach-workspace: true
-          orb-ref: sonatype-nexus-community/circleci-maven-release-orb@dev:${CIRCLE_BRANCH}
-          requires:
-            - orb-tools/publish-dev
-
-      - approve-release:
-          filters:
-            branches:
-              only: master
-          type: approval
-          requires:
-            - orb-tools/publish
 
       - orb-tools/increment:
           filters:
@@ -160,7 +155,7 @@ workflows:
           attach-workspace: true
           orb-ref: sonatype-nexus-community/circleci-maven-release-orb
           requires:
-            - approve-release
+            - orb-tools/publish-dev
 
 #      - orb-tools/dev-promote-prod:
 #          name: dev-promote-patch
