@@ -26,9 +26,9 @@ See the [demo](https://github.com/sonatype-nexus-community-circleci/circleci-mav
 #### How to use the Maven Release Orb in your config.yml
 
 There are a number of examples in the Orb documentation 
-(see the [Example source code](https://github.com/sonatype-nexus-community/circleci-maven-release-orb/blob/master/src/orb.yml#L104)).
+(see the [Example source code](src/examples)).
 
-The [simplest example](https://github.com/sonatype-nexus-community/circleci-maven-release-orb/blob/master/src/orb.yml#L105)
+The [simplest example](src/examples/maven-release-example.yml)
  of a CircleCI `config.yml` file is duplicated below:
 
       version: 2.1
