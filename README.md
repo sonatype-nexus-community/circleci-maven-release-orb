@@ -14,8 +14,6 @@
 -->
 # CircleCI Maven Release Orb [![CircleCI Build Status](https://circleci.com/gh/sonatype-nexus-community/circleci-maven-release-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/sonatype-nexus-community/circleci-maven-release-orb) [![CircleCI Orb Version](https://img.shields.io/badge/endpoint.svg?url=https://badges.circleci.io/orb/sonatype-nexus-community/circleci-maven-release-orb)](https://circleci.com/orbs/registry/orb/sonatype-nexus-community/circleci-maven-release-orb) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/sonatype-nexus-community/circleci-maven-release-orb/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
-[![CircleCI](https://circleci.com/gh/sonatype-nexus-community/circleci-maven-release-orb.svg?style=svg)](https://circleci.com/gh/sonatype-nexus-community/circleci-maven-release-orb)
-
 A CircleCI [Orb](https://circleci.com/docs/2.0/orb-intro/) than can be used to deploy maven projects using the [maven-release-plugin](https://maven.apache.org/maven-release/maven-release-plugin/).
 
 Click the `orb version` badge above for usage examples and documentation.
