@@ -1,0 +1,16 @@
+description: |
+  The configuration below will perform a "dry run" using a maven settings file in a different location
+  by redefining the `mvn-release-perform-command` command.
+  No changes will be committed to source control.ZZZ
+usage:
+  version: 2.1
+
+  orbs:
+    circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@x.y.z
+
+  workflows:
+    main:
+      jobs:
+        - circleci-maven-release-orb/run-maven-release:
+            ssh-fingerprints: "my:ss:hf:in:ge:rp:ri:nt..."
+            mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s my-settings.xml

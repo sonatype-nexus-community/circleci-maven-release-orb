@@ -1,0 +1,109 @@
+version: 2.1
+description: |
+  Run the maven-release-plugin in CircleCI. This Orb allows publishing of build
+  artifacts by invoking the maven-release-plugin. See: https://maven.apache.org/maven-release/maven-release-plugin/
+  Large chunks taken from this excellent Orb: https://github.com/bbottema-circleci/circleci-orbs
+  Thanks Benny!
+
+  Since many of the ideas in this Orb are taken from Benny's Orb, you may want to see
+  http://www.bennybottema.com/2019/02/20/automating-your-github-library-releases-to-maven-central/ to find out
+  more about the steps performed and which environment variables are expected in the Context.
+
+  The following environment variables are expected by this Orb, which are unique for each project:
+    - GITHUB_USERNAME: Your Github username
+    - GITHUB_EMAIL: Your Github email
+    - GPG_PASSPHRASE: Password used for signing artifacts with GPG
+    - SECRING_GPG_ASC_BASE64: Base64 GPG ASCII keyring
+    - SERVER_OSSRH_PASSWORD: OSS Sonatype username
+    - SERVER_OSSRH_USERNAME: OSS Sonatype password
+
+  The pom.xml at the root of your project also requires a few tags:
+
+  The pom must define a 'developerConnection' tag in the 'scm' section.
+  The following 'distributionManagement', 'build' and 'profile' definitions are also required.
+  An example of such a maven pom file is here:
+    https://github.com/sonatype-nexus-community/circleci-maven-release-orb/blob/master/test/pom.xml
+
+  <scm>
+    <developerConnection>scm:git:git@github.com:bhamail/test-circleci-maven-release.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>rso</id>
+      <url>https://repository.sonatype.org/content/repositories/releases/</url>
+    </repository>
+  </distributionManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-release-plugin</artifactId>
+        <configuration>
+          <releaseProfiles>gpg-sign</releaseProfiles>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>gpg-sign</id>
+      <!--
+      only sign during deploy phase
+      -->
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <configuration>
+                  <gpgArguments>
+                    <arg>--pinentry-mode</arg>
+                    <arg>loopback</arg>
+                  </gpgArguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+      <properties>
+        <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
+      </properties>
+    </profile>
+  </profiles>
+
+  The Orb also expects to find the maven settings file `.circleci/.maven.xml` in the project root.
+  You can override the location of this maven settings file by redefining the `mvn-release-perform-command` anchor.
+  An example of such a maven settings file is here:
+    https://github.com/sonatype-nexus-community/circleci-maven-release-orb/blob/master/test/.maven.xml
+
+  <settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/SETTINGS/1.0.0" xsi:schemalocation="http://maven.apache.org/SETTINGS/1.0.0
+                        http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <servers>
+      <server>
+        <!-- Maven Central Deployment -->
+        <id>rso</id>
+        <username>${env.SONATYPE_USERNAME}</username>
+        <password>${env.SONATYPE_PASSWORD}</password>
+      </server>
+    </servers>
+
+  In order to allow the Orb to commit version increments and tag changes back to the source bank (during a non-dryRun),
+  you need to provide a GitHub deploy key with "Write Acesss". You configure the build to use this key via the
+  'ssh-fingerprints' parameter.
+  See: [Adding an SSH Key to CircleCI](https://circleci.com/docs/2.0/add-ssh-key/?gclid=EAIaIQobChMIuN79poLb5QIVzuDICh2QSgh6EAAYASAAEgJIbfD_BwE)
+  Watchout for the PEM key format issue described in that article.
+
+display:
+  home_url: "https://github.com/sonatype-nexus-community/circleci-maven-release-orb#circleci-maven-release-orb"
+  source_url: "https://github.com/sonatype-nexus-community/circleci-maven-release-orb"

@@ -1,0 +1,3 @@
+description: "CircleCI provided docker image with OpenJDK installed. see: https://circleci.com/docs/2.0/circleci-images/#openjdk"
+docker:
+  - image: circleci/openjdk:8-jdk

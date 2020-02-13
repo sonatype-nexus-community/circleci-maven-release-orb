@@ -18,6 +18,8 @@
 
 A CircleCI [Orb](https://circleci.com/docs/2.0/orb-intro/) than can be used to deploy maven projects using the [maven-release-plugin](https://maven.apache.org/maven-release/maven-release-plugin/).
 
+Click the `orb version` badge above for usage examples and documentation.
+
 #### Orb Information
 The Orb is available on the CircleCI Orb Registry here: [circleci-maven-release-orb](https://circleci.com/orbs/registry/orb/sonatype-nexus-community/circleci-maven-release-orb).
 <!--

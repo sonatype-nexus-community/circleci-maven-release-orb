@@ -1,0 +1,17 @@
+description: |
+  The configuration below will use the maven-release-plugin to perform a "dry run" of a maven release.
+  Notice when redefining `mvn-release-perform-command`, you must still specify which maven settings file to use.
+  The example below still specifies the default expected by the Orb (`.circleci/.maven.xml`).
+  No changes will be committed to source control.
+usage:
+  version: 2.1
+
+  orbs:
+    circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@x.y.z
+
+  workflows:
+    main:
+      jobs:
+        - circleci-maven-release-orb/run-maven-release:
+            ssh-fingerprints: "my:ss:hf:in:ge:rp:ri:nt..."
+            mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s .circleci/.maven.xml
