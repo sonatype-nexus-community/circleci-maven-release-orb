@@ -31,6 +31,7 @@ steps:
           echo "Generated release.properties: ..."
           cat release.properties
         fi
+        echo "Performing release..."
         << parameters.mvn-release-perform-command >>
         echo "Release completed"
         MVN_VERSION_NEXT_DEV=$(<< parameters.mvn-read-version-command >>)
