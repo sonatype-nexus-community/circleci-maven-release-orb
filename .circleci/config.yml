@@ -7,7 +7,7 @@
 #  Eclipse Foundation. All other trademarks are the property of their respective owners.
 version: 2.1
 orbs:
-  orb-tools: circleci/orb-tools@9.0
+  orb-tools: circleci/orb-tools@10.0.3
   circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@<<pipeline.parameters.dev-orb-version>>
 
 my-orb-name: &MY_ORB_NAME
