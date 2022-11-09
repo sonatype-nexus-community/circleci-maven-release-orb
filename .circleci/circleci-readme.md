@@ -13,7 +13,7 @@ The local build runs in a docker container.
           
         circleci local execute -c .circleci/local-config.yml --job 'job-check-results'
 
-    Typically both commands are run together:
+    Typically, both commands are run together:
     
         circleci config process .circleci/config.yml > .circleci/local-config.yml && circleci local execute -c .circleci/local-config.yml --job 'job-check-results'
     
@@ -26,6 +26,13 @@ The local build runs in a docker container.
       However, the build will proceed and can complete “successfully”, which allows you to verify scripts in your config, etc.
       
       If the build does complete successfully, you should see a happy yellow `Success!` message.
+
+* If the `dev` version of the orb expires, you can get a new one published via:
+
+  ```
+  circleci orb pack src/ | circleci orb validate -
+  circleci orb pack src/ | circleci orb publish - sonatype-nexus-community/circleci-maven-release-orb@dev:alpha
+  ```  
 
 Miscellaneous
 -------------

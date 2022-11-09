@@ -7,7 +7,7 @@
 #  Eclipse Foundation. All other trademarks are the property of their respective owners.
 version: 2.1
 orbs:
-  orb-tools: circleci/orb-tools@10.0.3
+  orb-tools: circleci/orb-tools@10
   circleci-maven-release-orb: sonatype-nexus-community/circleci-maven-release-orb@<<pipeline.parameters.dev-orb-version>>
 
 my-orb-name: &MY_ORB_NAME
@@ -143,7 +143,7 @@ workflows:
       - approve-release:
           filters:
             branches:
-              only: master
+              only: main
           type: approval
 
       - orb-tools/lint:
@@ -159,7 +159,7 @@ workflows:
       - orb-tools/increment:
           filters:
             branches:
-              only: master
+              only: main
           attach-workspace: true
           <<: *MY_ORB_REF
           requires:
@@ -169,7 +169,7 @@ workflows:
           fail-if-semver-not-indicated: false
           filters:
             branches:
-              only: master
+              only: main
           <<: *MY_ORB_NAME
           publish-version-tag: true
           ssh-fingerprints: "b7:5b:6c:b5:81:8e:dc:2b:fd:fe:27:34:a7:96:d7:22"
