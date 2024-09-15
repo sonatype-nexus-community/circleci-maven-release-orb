@@ -69,7 +69,7 @@ description: |
             </executions>
           </plugin>
         </plugins>
-      </build>      
+      </build>
     </profile>
   </profiles>
 

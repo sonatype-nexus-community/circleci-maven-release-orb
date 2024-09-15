@@ -118,13 +118,13 @@ workflows:
       # allow the build to republish the new dev Orb. After a CI run completes with this IT section, you can restore
       # this IT section. Another approach may be to manually republish the dev Orb from you local machine when needed.
       - circleci-maven-release-orb/run-maven-release:
-            mvn-read-version-command: mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec -f test/pom.xml
-            mvn-release-prepare-command: mvn --batch-mode release:prepare -DdryRun=true -f test/pom.xml
-            mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s test/.maven.xml -f test/pom.xml
-            context: rso-base
+          mvn-read-version-command: mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec -f test/pom.xml
+          mvn-release-prepare-command: mvn --batch-mode release:prepare -DdryRun=true -f test/pom.xml
+          mvn-release-perform-command: mvn --batch-mode release:perform -DdryRun=true -s test/.maven.xml -f test/pom.xml
+          context: rso-base
       - job-check-results:
-            requires:
-              - circleci-maven-release-orb/run-maven-release
+          requires:
+            - circleci-maven-release-orb/run-maven-release
 
   # This workflow exists only to simplify running local IT builds, therefore it need never run on the CI server.
   wf_integration-test:
