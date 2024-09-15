@@ -11,11 +11,11 @@ The local build runs in a docker container.
 
   * Run a local build with the following command:
           
-        circleci local execute -c .circleci/local-config.yml --job 'job-check-results'
+        circleci local execute -c .circleci/local-config.yml 'job-check-results'
 
     Typically, both commands are run together:
     
-        circleci config process .circleci/config.yml > .circleci/local-config.yml && circleci local execute -c .circleci/local-config.yml --job 'job-check-results'
+        circleci config process .circleci/config.yml > .circleci/local-config.yml && circleci local execute -c .circleci/local-config.yml 'job-check-results'
     
     With the above command, operations that cannot occur during a local build will show an error like this:
      
