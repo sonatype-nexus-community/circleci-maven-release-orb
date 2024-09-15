@@ -12,7 +12,7 @@ description: |
   The following environment variables are expected by this Orb, which are unique for each project:
     - GITHUB_USERNAME: Your Github username
     - GITHUB_EMAIL: Your Github email
-    - GPG_PASSPHRASE: Password used for signing artifacts with GPG
+    - MAVEN_GPG_PASSPHRASE: Password used for signing artifacts with GPG
     - SECRING_GPG_ASC_BASE64: Base64 GPG ASCII keyring
     - SERVER_OSSRH_PASSWORD: OSS Sonatype username
     - SERVER_OSSRH_USERNAME: OSS Sonatype password
@@ -57,7 +57,7 @@ description: |
         <plugins>
           <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.6</version>
+            <version>3.2.6</version>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
@@ -65,20 +65,11 @@ description: |
                 <goals>
                   <goal>sign</goal>
                 </goals>
-                <configuration>
-                  <gpgArguments>
-                    <arg>--pinentry-mode</arg>
-                    <arg>loopback</arg>
-                  </gpgArguments>
-                </configuration>
               </execution>
             </executions>
           </plugin>
         </plugins>
-      </build>
-      <properties>
-        <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
-      </properties>
+      </build>      
     </profile>
   </profiles>
 
