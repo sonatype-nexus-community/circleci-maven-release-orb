@@ -33,6 +33,12 @@ The local build runs in a docker container.
   circleci orb pack src/ | circleci orb validate -
   circleci orb pack src/ | circleci orb publish - sonatype-nexus-community/circleci-maven-release-orb@dev:alpha
   ```  
+  
+* If automated release tools are failing, you can manually release a new dev/alpha version (auto incremented) of the orb via:
+
+  ```
+  circleci orb publish promote sonatype-nexus-community/circleci-maven-release-orb@dev:alpha patch
+  ```
 
 Miscellaneous
 -------------
